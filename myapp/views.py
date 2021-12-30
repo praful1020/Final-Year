@@ -84,8 +84,11 @@ def fpassword(request):
         except:
             msg = 'User IS Not Registered'
             return render(request,'login.html',{'msg':msg})
-        
-
-
-
     return render(request,'fpassword.html')    
+
+def profile(request):
+    return render(request,'profile.html')
+
+
+def tables(request):
+    return render(request,'tables.html')
