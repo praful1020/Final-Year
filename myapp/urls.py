@@ -9,5 +9,5 @@ urlpatterns = [
     path('fpassword/',views.fpassword,name='fpassword'),
     path('profile/',views.profile,name='profile'),
     path('tables/',views.tables,name='tables'),
-
+    path('logout/',views.logout,name='logout'),
 ]

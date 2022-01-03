@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from random import choices, randrange
 from django.conf import settings
@@ -8,21 +8,22 @@ from django.core.mail import send_mail
 # Create your views here.
 def login(request):
     if request.method == 'POST':
-        try:
+        #  try:
             uid = SecUser.objects.get(email=request.POST['email'])
             if request.POST['password'] == uid.password:
                 request.session['email'] = request.POST['email']
                 return render(request,'index.html',{'uid':uid})
             else:
                 return render(request,'login.html',{'msg':'Wrong Password'})
-        except:
-            return render(request,'login.html',{'msg':'Wrong Email'})
+        #  except:
+        #      return render(request,'login.html',{'msg':'Wrong Email'})
 
 
     return render(request,'login.html')
 
 def index(request):
-    return render(request,'index.html')
+    uid = SecUser.objects.get(email=request.session['email'])
+    return render(request,'index.html',{'uid':uid})
 
 def register(request):
     if request.method == 'POST':
@@ -87,8 +88,16 @@ def fpassword(request):
     return render(request,'fpassword.html')    
 
 def profile(request):
-    return render(request,'profile.html')
+    uid = SecUser.objects.get(email=request.session['email'])
+    return render(request,'profile.html',{'uid':uid})
 
 
 def tables(request):
-    return render(request,'tables.html')
+    uid = SecUser.objects.get(email=request.session['email'])
+    return render(request,'tables.html',{'uid':uid})
+
+def logout(request):
+    del request.session['email']
+    return redirect('login')
+
+    
