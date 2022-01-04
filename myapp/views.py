@@ -89,6 +89,15 @@ def fpassword(request):
 
 def profile(request):
     uid = SecUser.objects.get(email=request.session['email'])
+    if request.method == 'POST':
+       uid.name = request.POST['name']
+       uid.email = request.POST['email']
+       uid.mobile = request.POST['mobile']
+       uid.address = request.POST['address']
+       uid.city = request.POST['city']
+       uid.pincode = request.POST['pincode']
+       uid.save()
+    
     return render(request,'profile.html',{'uid':uid})
 
 
