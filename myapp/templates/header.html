@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+  
   <!-- Favicon -->
   <link rel="icon" href="{% static 'assets/img/brand/favicon.png' %}" type="image/png">
   <!-- Fonts -->
@@ -53,6 +53,14 @@
                 <span class="nav-link-text">Profile</span>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add-event' %}">
+                <i class="fa fa-tag"></i>
+                <span class="nav-link-text">Add-Event</span>
+              </a>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'tables' %}">
                 <i class="ni ni-bullet-list-67 text-default"></i>

@@ -109,4 +109,25 @@ def logout(request):
     del request.session['email']
     return redirect('login')
 
-    
+def add_event(request):
+    uid = SecUser.objects.get(email=request.session['email'])
+    if request.method == 'POST':
+        if 'pic' in request.FILES: 
+            Event.objects.create(
+                uid = uid,
+                title = request.POST['title'],
+                des = request.POST['des'],
+                pic = request.FILES['pic'],
+                event_at = request.POST['date']
+            )
+        else:
+            Event.objects.create(
+                uid = uid,
+                title = request.POST['title'],
+                des = request.POST['des'],
+                event_at = request.POST['date']
+            )
+        msg = 'Event Created'
+        return render(request,'add-event.html',{'uid':uid,'msg':msg})
+
+    return render(request,'add-event.html',{'uid':uid})

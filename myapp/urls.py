@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile/',views.profile,name='profile'),
     path('tables/',views.tables,name='tables'),
     path('logout/',views.logout,name='logout'),
+    path('add-event/',views.add_event,name='add-event'),
 ]
