@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render,redirect
 from .models import *
 from random import choices, randrange
@@ -131,3 +132,44 @@ def add_event(request):
         return render(request,'add-event.html',{'uid':uid,'msg':msg})
 
     return render(request,'add-event.html',{'uid':uid})
+
+def all_event(request):
+    uid = SecUser.objects.get(email=request.session['email'])
+    events = Event.objects.all()[::-1]
+    return render(request,'all-event.html',{'uid':uid,'events':events})
+
+def delete_event(request,pk):
+    event = Event.objects.get(id=pk)
+    event.delete()
+    return redirect('all-event')
+
+
+def edit_event(request,pk):
+    event = Event.objects.get(id=pk)
+    event_at = str(event.event_at)
+    uid = SecUser.objects.get(email=request.session['email'])
+    if request.method == 'POST':
+        event.uid = uid
+        event.title = request.POST['title']
+        event.des = request.POST['des']
+        event.event_at = request.POST['date'] 
+        if 'pic' in request.FILES:
+            event.pic = request.FILES['pic']
+        event.save()
+
+        return redirect('all-event')
+    return render(request,'edit-event.html',{'uid':uid, 'event':event,'event_at':event_at})
+
+
+def change_password(request):
+    uid = SecUser.objects.get(email=request.session['email'])
+    if request.method == 'POST':
+        if request.POST['oldpassword'] == uid.password:
+            if request.POST['newpassword'] == request.POST['cpassword']:
+                uid.password = request.POST['newpassword']
+                uid.save()
+
+                return render(request,'changepassword.html',{'msg':'Password Has been Changed'})
+            return render(request,'changepassword.html',{'Both new passwords are not same'})
+        return render(request,'changepassword.html',{'msg':'Old password is wrong'})
+    return render(request,'changepassword.html')

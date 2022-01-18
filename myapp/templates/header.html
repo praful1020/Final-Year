@@ -62,6 +62,13 @@
             </li>
 
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'all-event' %}">
+                <i class="fas fa-comment"></i>
+                <span class="nav-link-text">All-Event</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'tables' %}">
                 <i class="ni ni-bullet-list-67 text-default"></i>
                 <span class="nav-link-text">Tables</span>
@@ -278,7 +285,7 @@
                    {% endif %}
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">{{uid.name}}</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{uid.name}} <i class="fa fa-arrow-down"></i></span>
                   </div>
                 </div>
               </a>
@@ -290,9 +297,9 @@
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
-                <a href="#!" class="dropdown-item">
+                <a href="{% url 'change-password' %}" class="dropdown-item">
                   <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
+                  <span>Chang Password</span>
                 </a>
                 <a href="#!" class="dropdown-item">
                   <i class="ni ni-calendar-grid-58"></i>
