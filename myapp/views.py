@@ -172,4 +172,30 @@ def change_password(request):
                 return render(request,'changepassword.html',{'msg':'Password Has been Changed'})
             return render(request,'changepassword.html',{'Both new passwords are not same'})
         return render(request,'changepassword.html',{'msg':'Old password is wrong'})
-    return render(request,'changepassword.html')
+    return render(request,'changepassword.html',{'uid':uid})
+
+#def view_complain(request):
+    #uid = SecUser.objects.get(email=request.session['email'])
+    #complains = models.Complain.objects.all()
+    #return render(request,'view-complain.html',{'complains':complains,'uid':uid})
+
+
+def addmember(request):
+    uid = SecUser.objects.get(email=request.session['email'])
+    if request.method == 'POST':
+      Addmember.objects.create(
+            
+            name = request.POST['name'],
+            email = request.POST['email'],
+            mobile = request.POST['mobile no'],
+            password = request.POST['password'],
+            flat= request.POST['flat'],
+            address = request.POST['address'],
+            adharcard = request.POST['adharcard'],
+            pic = request.POST['pic'],
+
+            )
+    
+    msg = 'Member Added'
+    return render(request,'addmember.html',{'msg':msg,'uid':uid})
+

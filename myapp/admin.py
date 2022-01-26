@@ -7,3 +7,5 @@ from .models import *
 admin.site.register(SecUser)
 
 admin.site.register(Event)
+
+admin.site.register(Addmember)

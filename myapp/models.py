@@ -27,4 +27,18 @@ class Event(models.Model):
     def __str__(self):
         return self.title  
 
-        
+class Addmember(models.Model):
+    
+    name = models.CharField(max_length=50)
+    email = models.EmailField(unique=True)
+    mobile = models.CharField(max_length=10)
+    password = models.CharField(max_length=20) 
+    flat = models.CharField(max_length=10)
+    address = models.CharField(max_length=60)
+    adharcard = models.CharField(max_length=12)
+    pic = models.FileField(upload_to='Event',null=True,blank=True)
+
+
+    def __str__(self):
+        return self.name
+

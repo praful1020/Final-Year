@@ -15,4 +15,8 @@ urlpatterns = [
     path('edit-event/<int:pk>',views.edit_event,name='edit-event'),
     path('delete-event/<int:pk>',views.delete_event,name='delete-event'),
     path('change-password/',views.change_password,name='change-password'),
+   # path('view-complain/',views.view_complain,name='view-complain'),
+    path('addmember/',views.addmember,name='addmember'),
+
+    
 ]
