@@ -1,7 +1,7 @@
 from random import randrange
 from django.shortcuts import render,redirect
 from django.http.response import HttpResponse
-from myapp.models import Addmember
+from myapp.models import Addmember, Complain
 from myapp.models import Event
 
 import userapp
@@ -61,7 +61,7 @@ def uchange_password(request):
 
 
 def view_event(request):
-    uid = Addmember.objects.get(email=request.session['email'])
+    uid = Addmember.objects.get(email=request.session['uemail'])
     events = Event.objects.all()
     return render(request,'View-Events.html',{'uid':uid,'events':events})
 
@@ -69,3 +69,32 @@ def view_event(request):
 def utables(request):
     uid = Addmember.objects.get(email=request.session['email'])
     return render(request,'utables.html',{'uid':uid})
+
+
+
+def add_complain(request):
+    uid = Addmember.objects.get(email=request.session['uemail'])
+    if request.method == 'POST':
+        if 'pic' in request.FILES: 
+            Complain.objects.create(
+                cby = uid,
+                ctitle = request.POST['ctitle'],
+                cdes = request.POST['cdes'],
+                cpic = request.FILES['cpic'],
+                ctypes = request.POST['ctypes'],
+
+            )
+        else:
+            Complain.objects.create(
+                cby = uid,
+                ctitle = request.POST['ctitle'],
+                cdes = request.POST['cdes'],
+                ctypes = request.POST['ctypes'],
+
+                )
+        msg = 'Complain Send'
+        return render(request,'add_complain.html',{'uid':uid,'msg':msg})
+
+
+
+    return render(request,'add_complain.html',{'uid':uid})

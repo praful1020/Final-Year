@@ -42,3 +42,17 @@ class Addmember(models.Model):
     def __str__(self):
         return self.name
 
+
+class Complain(models.Model):
+    ctitle = models.CharField(max_length=50)
+    ctypes = models.CharField(max_length=50)
+    cdes = models.TextField()
+    ctime = models.DateTimeField(auto_now_add=True)
+    cby = models.ForeignKey(Addmember,on_delete=models.CASCADE)
+    solvetime = models.DateTimeField(null=True,blank=True)
+    solveby = models.ForeignKey(SecUser,on_delete=models.CASCADE,null=True,blank=True)
+    pic = models.FileField(upload_to='Complain',null=True,blank=True)
+
+
+    def __str__(self):
+        return self.ctitle

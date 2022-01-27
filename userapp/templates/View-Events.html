@@ -6,10 +6,11 @@
     
     <!-- Page content -->
     <br><br><br><br><br>
-    {% for event in events %}
     <br><br><br><br><br>
     <div class="container-fluid mt--6">
       <div class="row">
+
+    {% for event in events %}
         <div class="col-xl-4 order-xl-2">
           <div class="card card-profile">
             <!-- <img src="../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top"> -->
@@ -57,25 +58,29 @@
                   {{event.title}}<span class="font-weight-light"></span>
                 </h5>
                 <div class="h5 font-weight-300">
+                  <h5 class="h5">
                   <label>Event Discription:</label>
                   <i class="ni location_pin mr-2"></i>{{event.des}}
+                  </h5>
                 </div>
                 <div class="h5 mt-4">
                   <label>Event Date:</label>
                   <i class="ni business_briefcase-24 mr-2"></i>{{event.event_at}}
                 </div>
                 <div>
+                <h5 class="h5">
                   <label>Posted By:</label>
                   <i class="ni education_hat mr-2"></i>{{event.uid}}
+                  </h5>
                 </div>
               </div>
               
             </div>
           </div>
         </div>
+        {% endfor %}
         
       </div>
-      {% endfor %}
 
 
       <br><br><br><br><br>

@@ -9,3 +9,5 @@ admin.site.register(SecUser)
 admin.site.register(Event)
 
 admin.site.register(Addmember)
+
+admin.site.register(Complain)

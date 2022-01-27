@@ -9,6 +9,8 @@ urlpatterns = [
     path('uchange-password/',views.uchange_password,name='uchange-password'),
     path ('view-event',views.view_event,name='view-event'),
     path ('utables',views.utables,name='utables'),
+    path ('add_complain',views.add_complain,name='add_complain'),
+
 
 
 
