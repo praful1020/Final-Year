@@ -7,24 +7,26 @@ from myapp.models import Event
 import userapp
 from .models import *
 
+
 # Create your views here.
 def ulogin(request):  
     if request.method == 'POST':
-        #  try:
+          try:
             uid = Addmember.objects.get(email=request.POST['email'])
             if request.POST['password'] == uid.password:
                 request.session['uemail'] = request.POST['email']
                 return render(request,'uindex.html',{'uid':uid})
             else:
                 return render(request,'ulogin.html',{'msg':'Wrong Password'})
-        #  except:
-        #      return render(request,'login.html',{'msg':'Wrong Email'})
+          except:
+              return render(request,'login.html',{'msg':'Wrong Email'})
     return render(request,'ulogin.html')    
 
 
 def uindex(request):
     uid = Addmember.objects.get(email=request.session['uemail'])
     return render(request,'uindex.html',{'uid':uid})
+
 
 def ulogout(request):
     del request.session['uemail']
@@ -59,7 +61,6 @@ def uchange_password(request):
     return render(request,'uchangepassword.html',{'uid':uid})
 
 
-
 def view_event(request):
     uid = Addmember.objects.get(email=request.session['uemail'])
     events = Event.objects.all()
@@ -71,11 +72,11 @@ def utables(request):
     return render(request,'utables.html',{'uid':uid})
 
 
-
 def add_complain(request):
     uid = Addmember.objects.get(email=request.session['uemail'])
     if request.method == 'POST':
-        if 'pic' in request.FILES: 
+        print(request.FILES['cpic'])
+        if 'cpic' in request.FILES: 
             Complain.objects.create(
                 cby = uid,
                 ctitle = request.POST['ctitle'],
@@ -94,7 +95,11 @@ def add_complain(request):
                 )
         msg = 'Complain Send'
         return render(request,'add_complain.html',{'uid':uid,'msg':msg})
-
-
-
     return render(request,'add_complain.html',{'uid':uid})
+
+
+def uview_complains(request):
+    uid = Addmember.objects.get(email=request.session['uemail'])
+    complains = Complain.objects.filter(cby=uid)
+    return render(request,'uview-complains.html',{'complains':complains,'uid':uid})
+

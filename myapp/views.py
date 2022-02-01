@@ -1,9 +1,12 @@
+from urllib import request
 from django.http.response import HttpResponse
 from django.shortcuts import render,redirect
 from .models import *
 from random import choices, randrange
 from django.conf import settings
 from django.core.mail import send_mail
+from userapp.models import *
+
 
 
 # Create your views here.
@@ -174,28 +177,51 @@ def change_password(request):
         return render(request,'changepassword.html',{'msg':'Old password is wrong'})
     return render(request,'changepassword.html',{'uid':uid})
 
-#def view_complain(request):
-    #uid = SecUser.objects.get(email=request.session['email'])
-    #complains = models.Complain.objects.all()
-    #return render(request,'view-complain.html',{'complains':complains,'uid':uid})
+def view_complain(request):
+    uid = SecUser.objects.get(email=request.session['email'])
+    complains = Complain.objects.all()[::-1]
+    return render(request,'view-complain.html',{'complains':complains,'uid':uid})
 
 
 def addmember(request):
     uid = SecUser.objects.get(email=request.session['email'])
     if request.method == 'POST':
-      Addmember.objects.create(
-            
-            name = request.POST['name'],
-            email = request.POST['email'],
-            mobile = request.POST['mobile no'],
-            password = request.POST['password'],
-            flat= request.POST['flat'],
-            address = request.POST['address'],
-            adharcard = request.POST['adharcard'],
-            pic = request.POST['pic'],
+        try:
+            if 'pic' in request.FILES: 
+                Addmember.objects.create(
+                
+                    name = request.POST['name'],
+                    email = request.POST['email'],
+                    mobile = request.POST['mobile no'],
+                    password = request.POST['password'],
+                    flat= request.POST['flat'],
+                    address = request.POST['address'],
+                    adharcard = request.POST['adharcard'],
+                    pic = request.FILES['pic'],
+                )
+            else:
+                    Addmember.objects.create(
+                    name = request.POST['name'],
+                    email = request.POST['email'],
+                    mobile = request.POST['mobile no'],
+                    password = request.POST['password'],
+                    flat= request.POST['flat'],
+                    address = request.POST['address'],
+                    adharcard = request.POST['adharcard'],
+                ) 
 
-            )
-    
-    msg = 'Member Added'
-    return render(request,'addmember.html',{'msg':msg,'uid':uid})
+            msg = 'Member Added'
+        except:
+            msg = 'Member is already register this email'
+        return render(request,'addmember.html',{'msg':msg,'uid':uid})
+    return render(request,'addmember.html',{'uid':uid})
 
+def viewdetails(request,pk):
+    uid = SecUser.objects.get(email=request.session['email'])
+    complains = Complain.objects.get(id=pk)
+    return render(request,'view-details.html',{'uid':uid,'complains':complains})
+
+def delete_complain(request,pk):
+    complains = Complain.objects.get(id=pk)
+    complains.delete()
+    return redirect('view-complain')

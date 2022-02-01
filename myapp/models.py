@@ -51,7 +51,7 @@ class Complain(models.Model):
     cby = models.ForeignKey(Addmember,on_delete=models.CASCADE)
     solvetime = models.DateTimeField(null=True,blank=True)
     solveby = models.ForeignKey(SecUser,on_delete=models.CASCADE,null=True,blank=True)
-    pic = models.FileField(upload_to='Complain',null=True,blank=True)
+    cpic = models.FileField(upload_to='Complain',null=True,blank=True)
 
 
     def __str__(self):

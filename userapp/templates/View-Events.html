@@ -3,6 +3,27 @@
 {% block content %}
  <!-- Header -->
     <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Member</h6>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="#">Events</a></li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+              <a href="#" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <!-- Page content -->
     <br><br><br><br><br>
@@ -11,19 +32,19 @@
       <div class="row">
 
     {% for event in events %}
-        <div class="col-xl-4 order-xl-2">
-          <div class="card card-profile">
+        <div class="col-xl-4 order-xl-2 mb-4">
+          <div class="card card-profile" style="height: 100%;">
             <!-- <img src="../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top"> -->
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
-                  <a href="#">
-                    {% if event.pic %}
-                    <img src="{{event.pic.url}}" class="rounded-circle">
+                  {% if event.pic %}
+                  <a href="{{event.pic.url}}">
+                    <img src="{{event.pic.url}}" class="rectangle">
+                  </a>
                     {% else %}
                     No Image
                     {% endif %}
-                  </a>
                 </div>
               </div>
             </div>

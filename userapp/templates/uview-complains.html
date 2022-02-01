@@ -1,4 +1,4 @@
-{% extends 'header.html' %} 
+{% extends 'uheader.html' %} 
 {% load static %}
 {% block content %}
  <!-- Header -->
@@ -8,7 +8,7 @@
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Secretary</h6>
+              <h6 class="h2 text-white d-inline-block mb-0">Member</h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
@@ -39,11 +39,10 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col" class="sort" data-sort="name">Complain Title</th>
+                    <th scope="col" class="sort" data-sort="budget">Complain Description</th>
                     <th scope="col" class="sort" data-sort="status">Complain Date</th>
-                    <th scope="col" class="sort" data-sort="status">Complain Type</th>
                     <th scope="col">Posted By</th>
-                    <th scope="col">Action</th>
-
+                    <th scope="col" class="sort" data-sort="completion">Picture</th>
                     
                   </tr>
                 </thead>
@@ -53,28 +52,22 @@
                     <th scope="row">
                       {{complain.ctitle}}
                     </th>
-                    
+                    <td class="budget">
+                      {{complain.cdes}}
+                    </td>
                     <td>
                       {{complain.ctime}}
                     </td>
                     <td>
-                      {{complain.ctypes}}
-                    </td>
-                    <td>
                       {{complain.cby}}
                     </td>
-                    
-                    
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="{% url 'view-details' complain.id %}">View In Detail</a>
-                          <a class="dropdown-item" href="{% url 'delete-complain' complain.id %}">Delete</a>
-                        </div>
-                      </div>
+
+                    <td>
+                      {% if complain.cpic %}
+                      <img src="{{complain.cpic.url}}" alt="" width="50px" height="50px">
+                      {% else %}
+                      No Image
+                      {% endif %}
                     </td>
                   </tr>
                   {% endfor %}

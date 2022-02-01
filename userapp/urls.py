@@ -10,7 +10,8 @@ urlpatterns = [
     path ('view-event',views.view_event,name='view-event'),
     path ('utables',views.utables,name='utables'),
     path ('add_complain',views.add_complain,name='add_complain'),
-
+    path ('uview_complains',views.uview_complains,name='uview_complains'),
+    
 
 
 
