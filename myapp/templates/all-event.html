@@ -1,7 +1,7 @@
 {% extends 'header.html' %} 
 {% load static %}
 {% block content %}
- <!-- Header -->
+    <!-- Header -->
     <!-- Header -->
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
@@ -39,10 +39,8 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col" class="sort" data-sort="name">Event Title</th>
-                    <th scope="col" class="sort" data-sort="budget">Event Description</th>
                     <th scope="col" class="sort" data-sort="status">Event Date</th>
                     <th scope="col">Posted By</th>
-                    <th scope="col" class="sort" data-sort="completion">Picture</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -52,24 +50,14 @@
                     <th scope="row">
                       {{event.title}}
                     </th>
-                    <td class="budget">
-                      {{event.des}}
-                    </td>
+                    
                     <td>
                       {{event.event_at}}
                     </td>
                     <td>
                       {{event.uid}}
                     </td>
-                    <td>
-                      {% if event.pic %}
-                      <a href="{{event.pic.url}}">
-                        <img src="{{event.pic.url}}" alt="" width="50px" height="50px">
-                      </a>
-                      {% else %}
-                      No Image
-                      {% endif %}
-                    </td>
+                    
                     <td class="text-right">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,6 +65,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                           <a class="dropdown-item" href="{% url 'edit-event' event.id %}">Edit</a>
+                          <a class="dropdown-item" href="{% url 'event-details' event.id %}">View In details</a>
                           <a class="dropdown-item" href="{% url 'delete-event' event.id %}">Delete</a>
                         </div>
                       </div>

@@ -52,7 +52,16 @@ class Complain(models.Model):
     solvetime = models.DateTimeField(null=True,blank=True)
     solveby = models.ForeignKey(SecUser,on_delete=models.CASCADE,null=True,blank=True)
     cpic = models.FileField(upload_to='Complain',null=True,blank=True)
-
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.ctitle
+
+
+class Gallery(models.Model):
+    gby = models.ForeignKey(SecUser,on_delete=models.CASCADE)
+    gtype = models.CharField(max_length=50)
+    gpic = models.FileField(upload_to='gallery')
+
+    def __str__(self):
+        return self.gtype

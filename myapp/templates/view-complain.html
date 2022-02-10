@@ -42,14 +42,15 @@
                     <th scope="col" class="sort" data-sort="status">Complain Date</th>
                     <th scope="col" class="sort" data-sort="status">Complain Type</th>
                     <th scope="col">Posted By</th>
+                    <th scope="col" class="sort" data-sort="status">Status</th>
                     <th scope="col">Action</th>
-
-                    
                   </tr>
                 </thead>
                 <tbody class="list">
                   {% for complain in complains %}
+                  {% if complain.status == False %}
                   <tr>
+
                     <th scope="row">
                       {{complain.ctitle}}
                     </th>
@@ -63,8 +64,17 @@
                     <td>
                       {{complain.cby}}
                     </td>
-                    
-                    
+ 
+                    <td>
+                     {% if complain.status %}
+
+                      {% else %}
+                      <a href="{% url 'solve' complain.id %}">
+                      <button type="button" class="btn btn-primary mt-3">Solve</button>
+                      </a>
+                      {% endif %}
+                    </td>
+
                     <td class="text-right">
                       <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,10 +87,13 @@
                       </div>
                     </td>
                   </tr>
+                  {% endif %}
                   {% endfor %}
                 </tbody>
               </table>
             </div>
+            
+
             <!-- Card footer -->
             <div class="card-footer py-4">
               <nav aria-label="...">

@@ -1,7 +1,7 @@
 from random import randrange
 from django.shortcuts import render,redirect
 from django.http.response import HttpResponse
-from myapp.models import Addmember, Complain
+from myapp.models import Addmember, Complain, Gallery
 from myapp.models import Event
 
 import userapp
@@ -103,3 +103,21 @@ def uview_complains(request):
     complains = Complain.objects.filter(cby=uid)
     return render(request,'uview-complains.html',{'complains':complains,'uid':uid})
 
+def uviewdetails(request,pk):
+    uid = Addmember.objects.get(email=request.session['email'])
+    complains = Complain.objects.get(id=pk)
+    return render(request,'uview-details.html',{'uid':uid,'complains':complains})
+
+
+def image(request):
+    uid = Addmember.objects.get(email=request.session['email'])
+    gym = Gallery.objects.filter(gtype='gym')
+    garden = Gallery.objects.filter(gtype='garden')
+    swimmingpool = Gallery.objects.filter(gtype='swimmingpool')
+    indoorstadium = Gallery.objects.filter(gtype='indoorstadium')
+    childrenground = Gallery.objects.filter(gtype='childrenground')
+
+    
+
+    
+    return render(request,'image.html',{'uid':uid,'gym':gym,'garden':garden,'swimmingpool':swimmingpool,'indoorstadium':indoorstadium,'childrenground':childrenground})

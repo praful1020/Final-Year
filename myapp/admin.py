@@ -11,3 +11,5 @@ admin.site.register(Event)
 admin.site.register(Addmember)
 
 admin.site.register(Complain)
+
+admin.site.register(Gallery)

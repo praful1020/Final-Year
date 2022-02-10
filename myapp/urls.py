@@ -19,8 +19,14 @@ urlpatterns = [
     path('addmember/',views.addmember,name='addmember'),
     path('view-details/<int:pk>',views.viewdetails,name='view-details'),
     path('delete-complain/<int:pk>',views.delete_complain,name='delete-complain'),
+    path('solve/<int:pk>',views.solve,name='solve'),
+    path('event-details/<int:pk>',views.eventdetails,name='event-details'),
+    path('gallery/',views.gallery,name='gallery'),
 
 
 
     
+
+
+     
 ]

@@ -1,3 +1,4 @@
+from asyncio import events
 from urllib import request
 from django.http.response import HttpResponse
 from django.shortcuts import render,redirect
@@ -6,7 +7,7 @@ from random import choices, randrange
 from django.conf import settings
 from django.core.mail import send_mail
 from userapp.models import *
-
+from datetime import datetime
 
 
 # Create your views here.
@@ -216,12 +217,44 @@ def addmember(request):
         return render(request,'addmember.html',{'msg':msg,'uid':uid})
     return render(request,'addmember.html',{'uid':uid})
 
+
 def viewdetails(request,pk):
     uid = SecUser.objects.get(email=request.session['email'])
     complains = Complain.objects.get(id=pk)
     return render(request,'view-details.html',{'uid':uid,'complains':complains})
 
+
 def delete_complain(request,pk):
     complains = Complain.objects.get(id=pk)
     complains.delete()
     return redirect('view-complain')
+
+
+def solve(request,pk):
+    complain = Complain.objects.get(id=pk)
+    uid = SecUser.objects.get(email=request.session['email'])
+    complain.status = True
+    complain.solveby = uid
+    complain.solvetime = datetime.now()
+    complain.save()
+    return redirect('view-complain')
+
+
+def eventdetails(request,pk):
+    uid = SecUser.objects.get(email=request.session['email'])
+    events = Event.objects.get(id=pk)
+    return render(request,'event-details.html',{'uid':uid,'event':events})
+    
+    
+def gallery(request):
+    uid = SecUser.objects.get(email=request.session['email'])
+    if request.method == 'POST':
+        Gallery.objects.create( 
+            gby = uid,
+            gtype = request.POST['gtype'],
+            gpic = request.FILES['gpic'],
+        )
+    
+        msg = 'Image Added'
+        return render(request,'gallery.html',{'msg':msg,'uid':uid})
+    return render(request,'gallery.html',{'uid':uid}) 
