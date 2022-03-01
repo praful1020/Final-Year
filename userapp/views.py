@@ -118,6 +118,9 @@ def image(request):
     childrenground = Gallery.objects.filter(gtype='childrenground')
 
     
-
-    
     return render(request,'image.html',{'uid':uid,'gym':gym,'garden':garden,'swimmingpool':swimmingpool,'indoorstadium':indoorstadium,'childrenground':childrenground})
+
+
+def notice(request):
+    uid = Addmember.objects.get(email=request.session['email'])
+    return render(request,'notice.html',{'uid':uid,})

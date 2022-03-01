@@ -89,14 +89,22 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{%url 'uprofile' %}">
+              <a class="nav-link" href="{% url 'uprofile' %}">
                 <i class="ni ni-single-02 text-yellow"></i>
                 <span class="nav-link-text">Profile</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{%url 'image' %}">
+              <a class="nav-link" href="{% url 'notice' %}">
+                <i class="far fa-file"></i>
+                <span class="nav-link-text">Notice Board</span>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'image' %}">
                 <i class="far fa-image"></i>
                 <span class="nav-link-text">Soceity Images</span>
               </a>

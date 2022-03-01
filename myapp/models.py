@@ -65,3 +65,11 @@ class Gallery(models.Model):
 
     def __str__(self):
         return self.gtype
+
+
+class Notice(models.Model):
+    ntype = models.CharField(max_length=50)
+    ntitle = models.CharField(max_length=50)
+    ndes = models.TextField()
+    nsendby = models.ForeignKey(SecUser,on_delete=models.CASCADE,null=True,blank=True)
+    ntime = models.DateTimeField(null=True,blank=True)

@@ -13,6 +13,7 @@ urlpatterns = [
     path ('uview_complains/',views.uview_complains,name='uview_complains'),
     path('uview-details/<int:pk>',views.uviewdetails,name='uview-details'),
     path ('image/',views.image,name='image'),
+    path ('notice/',views.notice,name='notice'),
 
     
     
