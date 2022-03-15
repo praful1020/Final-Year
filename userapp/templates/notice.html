@@ -21,103 +21,85 @@
               <a href="#" class="btn btn-sm btn-neutral">Filters</a>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
+    
     <!-- Page content -->
+    <br><br><br><br><br>
+    <br><br><br><br><br>
     <div class="container-fluid mt--6">
       <div class="row">
-        <div class="col">
-          <div class="card">
-            <!-- Card header -->
-            <div class="card-header border-0">
-              <h3 class="mb-0">Notice Table</h3>
+
+    {% for notice in notices %}
+        <div class="col-xl-4 order-xl-2 mb-4">
+          <div class="card card-profile" style="height: 100%;">
+            <!-- <img src="../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top"> -->
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                 
+                </div>
+              </div>
             </div>
-            <!-- Light table -->
-            <div class="table-responsive">
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col" class="sort" data-sort="name">Complain Title</th>
-                    <th scope="col" class="sort" data-sort="status">Complain Date</th>
-                    <th scope="col" class="sort" data-sort="status">Complain Type</th>
-                    <th scope="col">Posted By</th>
-                    <th scope="col" class="sort" data-sort="status">Status</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody class="list">
-                  {% for complain in complains %}
-                  {% if complain.status == False %}
-                  <tr>
-
-                    <th scope="row">
-                      {{complain.ctitle}}
-                    </th>
-                    
-                    <td>
-                      {{complain.ctime}}
-                    </td>
-                    <td>
-                      {{complain.ctypes}}
-                    </td>
-                    <td>
-                      {{complain.cby}}
-                    </td>
- 
-                    <td>
-                     {% if complain.status %}
-
-                      {% else %}
-                      <a href="{% url 'solve' complain.id %}">
-                      <button type="button" class="btn btn-primary mt-3">Solve</button>
-                      </a>
-                      {% endif %}
-                    </td>
-
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="{% url 'view-details' complain.id %}">View In Detail</a>
-                          <a class="dropdown-item" href="{% url 'delete-complain' complain.id %}">Delete</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  {% endif %}
-                  {% endfor %}
-                </tbody>
-              </table>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+               
+              </div>
             </div>
-            
-
-            <!-- Card footer -->
-            <div class="card-footer py-4">
-              <nav aria-label="...">
-                <ul class="pagination justify-content-end mb-0">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">
-                      <i class="fas fa-angle-left"></i>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <i class="fas fa-angle-right"></i>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center">
+                    <div>
+                      <span class="heading"></span>
+                      <span class="description"></span>
+                    </div>
+                    <div>
+                      <span class="heading"></span>
+                      <span class="description"></span>
+                    </div>
+                    <div>
+                      <span class="heading"></span>
+                      <span class="description"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="text-center">
+                <h5 class="h3">
+                <label>Notice Title:</label>
+                  {{notice.ntitle}}<span class="font-weight-light"></span>
+                </h5>
+                <div class="h5 font-weight-300">
+                  <h5 class="h5">
+                  <label>Notice Discription:</label>
+                  <i class="ni location_pin mr-2"></i>{{notice.ndes}}
+                  </h5>
+                </div>
+                <div class="h5 mt-4">
+                  <label>Notice Time</label>
+                  <i class="ni business_briefcase-24 mr-2"></i>{{notice.ntime}}
+                </div>
+                <div>
+                <h5 class="h5">
+                  <label>Send By:</label>
+                  <i class="ni education_hat mr-2"></i>{{notice.nsendby.name}}
+                  </h5>
+                </div>
+              </div>
+              
             </div>
           </div>
         </div>
+        {% endfor %}
+        
       </div>
-      <!-- Dark table -->
-      
-      
-      <!-- Footer -->
+
+
+      <br><br><br><br><br>
+
+
   {% endblock %}

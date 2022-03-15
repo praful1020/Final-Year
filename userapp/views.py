@@ -1,8 +1,8 @@
 from random import randrange
 from django.shortcuts import render,redirect
 from django.http.response import HttpResponse
-from myapp.models import Addmember, Complain, Gallery
-from myapp.models import Event
+from myapp.models import Addmember, Complain, Gallery, SecUser
+from myapp.models import Event, Notice
 
 import userapp
 from .models import *
@@ -123,4 +123,5 @@ def image(request):
 
 def notice(request):
     uid = Addmember.objects.get(email=request.session['email'])
-    return render(request,'notice.html',{'uid':uid,})
+    notices = Notice.objects.all()
+    return render(request,'notice.html',{'uid':uid,'notices':notices})

@@ -72,4 +72,4 @@ class Notice(models.Model):
     ntitle = models.CharField(max_length=50)
     ndes = models.TextField()
     nsendby = models.ForeignKey(SecUser,on_delete=models.CASCADE,null=True,blank=True)
-    ntime = models.DateTimeField(null=True,blank=True)
+    ntime = models.DateTimeField(auto_now_add=True)

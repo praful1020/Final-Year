@@ -258,3 +258,18 @@ def gallery(request):
         msg = 'Image Added'
         return render(request,'gallery.html',{'msg':msg,'uid':uid})
     return render(request,'gallery.html',{'uid':uid}) 
+
+
+def addnotice(request):
+    uid = SecUser.objects.get(email=request.session['email'])
+    if request.method == 'POST':
+            Notice.objects.create(
+                ntype = request.POST['ntype'],
+                ntitle = request.POST['ntitle'],
+                ndes = request.POST['ndes'],
+                nsendby = uid
+            )
+            msg = 'Notice Created'
+            return render(request,'add-notice.html',{'uid':uid,'msg':msg})
+    return render(request,'add-notice.html',{'uid':uid})
+
