@@ -15,3 +15,4 @@ admin.site.register(Complain)
 admin.site.register(Gallery)
 
 admin.site.register(Notice)
+admin.site.register(Pay)

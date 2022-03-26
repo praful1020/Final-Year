@@ -11,8 +11,8 @@
               <h6 class="h2 text-white d-inline-block mb-0">Member</h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Events</a></li>
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i>Maintenence</a></li>
+                  <li class="breadcrumb-item"><a href="#">Pay Maintenance</a></li>
                 </ol>
               </nav>
             </div>
@@ -27,103 +27,79 @@
     </div>
     
     <!-- Page content -->
-    <br><br><br><br><br>
-    <br><br><br><br><br>
-    <div class="container-fluid mt--6">
-      <div class="row">
-
-
-        <div class="col-xl-4 order-xl-2 mb-4">
-          <div class="card card-profile" style="height: 100%;">
-            <!-- <img src="../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top"> -->
+    <br><br><br>
+    <!-- <br><br><br><br><br> -->
     
-            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-              <div class="d-flex justify-content-between">
-               
-              </div>
-            </div>
-            <div class="card-body pt-0">
-              <div class="row">
-                <div class="col">
-                  <div class="card-profile-stats d-flex justify-content-center">
-                    <div>
-                      <span class="heading"></span>
-                      <span class="description"></span>
-                    </div>
-                    <div>
-                      <span class="heading"></span>
-                      <span class="description"></span>
-                    </div>
-                    <div>
-                      <span class="heading"></span>
-                      <span class="description"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="text-center">
-                <h5 class="h3">
-                <label>User</label>
-                  {{pay.user}}<span class="font-weight-light"></span>
-                </h5>
-                <div class="h5 font-weight-300">
-                  <h5 class="h5">
-                  <label>Pay Id:</label>
-                  <i class="ni location_pin mr-2"></i>{{pay.payid}}
-                  </h5>
-                </div>
-                <div class="h5 mt-4">
-                  <label>Pay Date:</label>
-                  <i class="ni business_briefcase-24 mr-2"></i>{{pay.pdate}}
-                </div>
-                <div>
-                <h5 class="h5">
-                  <label>Pay Amount:</label>
-                  <i class="ni education_hat mr-2"></i>{{pay.pamount}}
-                  </h5>
-                </div>
-              </div>
-              <button class="btn" id="pay-btn">Donate❤️</button>
-            </div>
-          </div>
-        </div>
-        
-        
+    <style>
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+      }
+      
+      .price {
+        color: grey;
+        font-size: 22px;
+      }
+      
+      .card button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+      }
+      
+      .card button:hover {
+        opacity: 0.7;
+      }
+      </style>
+      
+      <h2 style="text-align:center">Product Card</h2>
+      
+      <div class="card">
+        <!-- <img src="/w3images/jeans3.jpg" alt="Denim Jeans" style="width:100%"> -->
+        <h1>Tailored Jeans {{pay_d.pdate}}</h1>
+        <p class="price">${{pay_d.pamount}}</p>
+        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+        <p><button class="btn" id="pay-btn">Pay Maintenance</button></p>
       </div>
+      
+      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      <script>
+        var options = {
+           
+          // Enter the Key ID generated from the Dashboard
+          key: "{{ razorpay_merchant_key }}",
+           
+          // Amount is in currency subunits.
+          // Default currency is INR. Hence,
+          // 50000 refers to 50000 paise
+          amount: "{{ razorpay_amount }}",
+          currency: "{{ currency }}",
+           
+          // Your/store name.
+          name: "Dj Razorpay",
+           
+          // Pass the `id` obtained in the response of Step 1
+          order_id: "{{ razorpay_order_id }}",
+          callback_url: "{{ callback_url }}",
+        };
+         
+        // initialise razorpay with the options.
+        var rzp1 = new Razorpay(options);
+         
+        // add event listener to the payment button.
+        document.getElementById("pay-btn").onclick = function (e) {
+          rzp1.open();
+          e.preventDefault();
+        };
+      </script>
 
-
-      <br><br><br><br><br>
-
- <!-- Razorpay's Javascript code. -->
- <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
- <script>
-   var options = {
-      
-     // Enter the Key ID generated from the Dashboard
-     key: "{{ razorpay_merchant_key }}",
-      
-     // Amount is in currency subunits.
-     // Default currency is INR. Hence,
-     // 50000 refers to 50000 paise
-     amount: "{{ razorpay_amount }}",
-     currency: "{{ currency }}",
-      
-     // Your/store name.
-     name: "Dj Razorpay",
-      
-     // Pass the `id` obtained in the response of Step 1
-     order_id: "{{ razorpay_order_id }}",
-     callback_url: "{{ callback_url }}",
-   };
-    
-   // initialise razorpay with the options.
-   var rzp1 = new Razorpay(options);
-    
-   // add event listener to the payment button.
-   document.getElementById("pay-btn").onclick = function (e) {
-     rzp1.open();
-     e.preventDefault();
-   };
- </script>
   {% endblock %}

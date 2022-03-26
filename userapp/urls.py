@@ -16,7 +16,7 @@ urlpatterns = [
     path ('image/',views.image,name='image'),
     path ('notice/',views.notice,name='notice'),
     path('pay/', views.pay, name='pay'),
-    path('paymenthandler/', views.paymenthandler, name='paymenthandler'),    
+    path('pay/paymenthandler/<int:pk>', views.paymenthandler, name='paymenthandler'),    
     
 
 ]

@@ -143,11 +143,11 @@ def pay(request):
         pay_d = Pay.objects.create(
            user = uid,
            pamount = request.POST['pamount'],
-           pdate = request.POST['pdate'],
+           pdate = request.POST['pdate']+'-01',
            
         )
         currency = 'INR'
-        amount = 20000  # Rs. 200
+        amount = 150000  # Rs. 200
     
         # Create a Razorpay Order
         razorpay_order = razorpay_client.order.create(dict(amount=amount,
@@ -156,7 +156,7 @@ def pay(request):
     
         # order id of newly created order.
         razorpay_order_id = razorpay_order['id']
-        callback_url = 'paymenthandler/'
+        callback_url = f'paymenthandler/{pay_d.id}'
     
         # we need to pass these details to frontend.
         context = {}
@@ -165,10 +165,11 @@ def pay(request):
         context['razorpay_amount'] = amount
         context['currency'] = currency
         context['callback_url'] = callback_url
-        context['pay'] = pay_d
+        context['pay_d'] = pay_d
+        context['uid']= uid
 
         return render(request, 'paydetail.html', context=context)
-    return render(request, 'pay.html')
+    return render(request, 'pay.html',{'uid':uid})
         
  
  
@@ -177,7 +178,7 @@ def pay(request):
 # POST request will be made by Razorpay
 # and it won't have the csrf token.
 @csrf_exempt
-def paymenthandler(request):
+def paymenthandler(request,pk):
  
     # only accept POST request.
     if request.method == "POST":
@@ -197,14 +198,17 @@ def paymenthandler(request):
             result = razorpay_client.utility.verify_payment_signature(
                 params_dict)
             # if result is None:
-            amount = 20000  # Rs. 200
+            amount = 150000  # Rs. 200
             try:
 
                 # capture the payemt
                 razorpay_client.payment.capture(payment_id, amount)
-
+                payd = Pay.objects.get(id=pk)
+                payd.payid= payment_id
+                payd.pverifiy = True
+                payd.save()
                 # render success page on successful caputre of payment
-                return render(request, 'successpay.html')
+                return render(request, 'successpay.html',{'pay':payd})
             except:
 
                 # if there is an error while capturing payment.
