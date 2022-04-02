@@ -17,7 +17,7 @@ def ulogin(request):
             uid = Addmember.objects.get(email=request.POST['email'])
             if request.POST['password'] == uid.password:
                 request.session['uemail'] = request.POST['email']
-                return render(request,'uindex.html',{'uid':uid})
+                return redirect("uindex")
             else:
                 return render(request,'ulogin.html',{'msg':'Wrong Password'})
         #   except:
@@ -27,7 +27,12 @@ def ulogin(request):
 
 def uindex(request):
     uid = Addmember.objects.get(email=request.session['uemail'])
-    return render(request,'uindex.html',{'uid':uid})
+    tmember = Addmember.objects.all().count()
+    tevent = Event.objects.all().count()
+    tcomplain = Complain.objects.all().count()
+    tnotice = Notice.objects.all().count()
+    notices = Notice.objects.all()[::-1][:4]
+    return render(request,'uindex.html',{'uid':uid,'notices':notices,'tmember':tmember,'tevent':tevent,'tcomplain':tcomplain,'tnotice':tnotice})
 
 
 def ulogout(request):
@@ -70,7 +75,7 @@ def view_event(request):
 
 
 def utables(request):
-    uid = Addmember.objects.get(email=request.session['email'])
+    uid = Addmember.objects.get(email=request.session['uemail'])
     return render(request,'utables.html',{'uid':uid})
 
 
@@ -112,7 +117,7 @@ def uviewdetails(request,pk):
 
 
 def image(request):
-    uid = Addmember.objects.get(email=request.session['email'])
+    uid = Addmember.objects.get(email=request.session['uemail'])
     gym = Gallery.objects.filter(gtype='gym')
     garden = Gallery.objects.filter(gtype='garden')
     swimmingpool = Gallery.objects.filter(gtype='swimmingpool')
@@ -124,7 +129,7 @@ def image(request):
 
 
 def notice(request):
-    uid = Addmember.objects.get(email=request.session['email'])
+    uid = Addmember.objects.get(email=request.session['uemail'])
     notices = Notice.objects.all()
     return render(request,'notice.html',{'uid':uid,'notices':notices})
 
@@ -150,9 +155,9 @@ def pay(request):
         amount = 150000  # Rs. 200
     
         # Create a Razorpay Order
-        razorpay_order = razorpay_client.order.create(dict(amount=amount,
-                                                        currency=currency,
-                                                        payment_capture='0'))
+        razorpay_order = razorpay_client.order.create(dict(amount=amount, currency=currency,payment_capture='0'))
+
+
     
         # order id of newly created order.
         razorpay_order_id = razorpay_order['id']

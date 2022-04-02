@@ -75,6 +75,9 @@ class Notice(models.Model):
     nsendby = models.ForeignKey(SecUser,on_delete=models.CASCADE,null=True,blank=True)
     ntime = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.ntype
+
 class Pay(models.Model):
    
     user = models.ForeignKey(Addmember,on_delete=models.CASCADE,null=True,blank=True)
@@ -83,3 +86,6 @@ class Pay(models.Model):
     pdate = models.DateField()
     pverifiy = models.BooleanField(default=False)
     payid = models.CharField(max_length=50,null=True,blank=True)
+
+    def __str__(self):
+        return self.user

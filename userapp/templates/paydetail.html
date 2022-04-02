@@ -3,6 +3,7 @@
 {% block content %}
  <!-- Header -->
     <!-- Header -->
+  
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
@@ -61,13 +62,13 @@
       }
       </style>
       
-      <h2 style="text-align:center">Product Card</h2>
+      <h2 style="text-align:center">Confirm Your Maintenance Detail</h2>
       
       <div class="card">
         <!-- <img src="/w3images/jeans3.jpg" alt="Denim Jeans" style="width:100%"> -->
-        <h1>Tailored Jeans {{pay_d.pdate}}</h1>
-        <p class="price">${{pay_d.pamount}}</p>
-        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+        <h1>Mamber: {{pay_d.user}}</h1>
+        <h2>Maintenance Date: {{pay_d.pdate}}</h2>
+        <p class="price">Amount: {{pay_d.pamount}}</p>
         <p><button class="btn" id="pay-btn">Pay Maintenance</button></p>
       </div>
       
