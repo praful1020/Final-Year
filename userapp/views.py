@@ -13,15 +13,15 @@ from .models import *
 # Create your views here.
 def ulogin(request):  
     if request.method == 'POST':
-        #   try:
+        try:
             uid = Addmember.objects.get(email=request.POST['email'])
             if request.POST['password'] == uid.password:
                 request.session['uemail'] = request.POST['email']
                 return redirect("uindex")
             else:
                 return render(request,'ulogin.html',{'msg':'Wrong Password'})
-        #   except:
-        #       return render(request,'ulogin.html',{'msg':'Wrong Email'})
+        except:
+            return render(request,'ulogin.html',{'msg':'Wrong Email'})
     return render(request,'ulogin.html')    
 
 

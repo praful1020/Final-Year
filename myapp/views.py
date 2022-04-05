@@ -17,7 +17,7 @@ def login(request):
             uid = SecUser.objects.get(email=request.POST['email'])
             if request.POST['password'] == uid.password:
                 request.session['email'] = request.POST['email']
-                return render(request,'index.html',{'uid':uid})
+                return redirect('index')
             else:
                 return render(request,'login.html',{'msg':'Wrong Password'})
         except:
