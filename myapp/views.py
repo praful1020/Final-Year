@@ -13,22 +13,27 @@ from datetime import datetime
 # Create your views here.
 def login(request):
     if request.method == 'POST':
-        #  try:
+        try:
             uid = SecUser.objects.get(email=request.POST['email'])
             if request.POST['password'] == uid.password:
                 request.session['email'] = request.POST['email']
                 return render(request,'index.html',{'uid':uid})
             else:
                 return render(request,'login.html',{'msg':'Wrong Password'})
-        #  except:
-        #      return render(request,'login.html',{'msg':'Wrong Email'})
-
-
+        except:
+            return render(request,'login.html',{'msg':'Wrong Email'})
     return render(request,'login.html')
 
 def index(request):
     uid = SecUser.objects.get(email=request.session['email'])
-    return render(request,'index.html',{'uid':uid})
+    tmember = Addmember.objects.all().count()
+    tevent = Event.objects.all().count()
+    tcomplain = Complain.objects.all().count()
+    tnotice = Notice.objects.all().count()
+    complains = Complain.objects.all()[::-1][:4]
+    mpay = Pay.objects.all()[::-1][:4]
+    return render(request,'index.html',{'uid':uid,'mpay':mpay,'complains':complains,'tmember':tmember,'tevent':tevent,'tcomplain':tcomplain,'tnotice':tnotice})
+    
 
 def register(request):
     if request.method == 'POST':
@@ -108,8 +113,11 @@ def profile(request):
 
 def tables(request):
     uid = SecUser.objects.get(email=request.session['email'])
-    return render(request,'tables.html',{'uid':uid})
+    payd = Pay.objects.all()[::-1]
 
+    return render(request,'tables.html',{'uid':uid,'payd':payd})
+
+    
 def logout(request):
     del request.session['email']
     return redirect('login')

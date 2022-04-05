@@ -32,7 +32,8 @@ def uindex(request):
     tcomplain = Complain.objects.all().count()
     tnotice = Notice.objects.all().count()
     notices = Notice.objects.all()[::-1][:4]
-    return render(request,'uindex.html',{'uid':uid,'notices':notices,'tmember':tmember,'tevent':tevent,'tcomplain':tcomplain,'tnotice':tnotice})
+    complains = Complain.objects.all()[::-1][:4]
+    return render(request,'uindex.html',{'uid':uid,'complains':complains,'notices':notices,'tmember':tmember,'tevent':tevent,'tcomplain':tcomplain,'tnotice':tnotice})
 
 
 def ulogout(request):
@@ -111,7 +112,7 @@ def uview_complains(request):
     return render(request,'uview-complains.html',{'complains':complains,'uid':uid})
 
 def uviewdetails(request,pk):
-    uid = Addmember.objects.get(email=request.session['email'])
+    uid = Addmember.objects.get(email=request.session['uemail'])
     complains = Complain.objects.get(id=pk)
     return render(request,'uview-details.html',{'uid':uid,'complains':complains})
 

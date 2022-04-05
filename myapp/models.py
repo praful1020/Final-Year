@@ -87,5 +87,5 @@ class Pay(models.Model):
     pverifiy = models.BooleanField(default=False)
     payid = models.CharField(max_length=50,null=True,blank=True)
 
-    def __str__(self):
+    def __user__(self):
         return self.user
