@@ -82,12 +82,7 @@
                 <span class="nav-link-text">Dashboard</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="examples/map.html">
-                <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Google</span>
-              </a>
-            </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="{% url 'uprofile' %}">
                 <i class="ni ni-single-02 text-yellow"></i>
@@ -97,8 +92,8 @@
 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'pay' %}">
-                <i class="ni ni-single-02 text-yellow"></i>
-                <span class="nav-link-text">Maintenance Pay</span>
+                  <i class="ni ni-credit-card"></i>
+                  <span class="nav-link-text">Maintenance Pay</span>
               </a>
             </li>
 
@@ -140,12 +135,7 @@
               </a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'utables' %}">
-                <i class="ni ni-bullet-list-67 text-default"></i>
-                <span class="nav-link-text">Tables</span>
-              </a>
-            </li>
+            
            </ul>
         </div>
       </div>
@@ -159,14 +149,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
           <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-            <div class="form-group mb-0">
-              <div class="input-group input-group-alternative input-group-merge">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-search"></i></span>
-                </div>
-                <input class="form-control" placeholder="Search" type="text">
-              </div>
-            </div>
+            
             <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
@@ -189,9 +172,7 @@
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-bell-55"></i>
-              </a>
+              
               <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                 <!-- Dropdown header -->
                 <div class="px-3 py-3">
@@ -305,41 +286,44 @@
               </a>
               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
                 <div class="row shortcuts px-4">
-                  <a href="#!" class="col-4 shortcut-item">
+                  <a href="{% url 'uprofile' %}" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-red">
-                      <i class="ni ni-calendar-grid-58"></i>
+                      <i class="ni ni-single-02 text-yellow"></i>
                     </span>
-                    <small>Calendar</small>
+                    <small>Profile</small>
                   </a>
-                  <a href="#!" class="col-4 shortcut-item">
+                  <a href="{% url 'notice' %}" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
-                      <i class="ni ni-email-83"></i>
+                      <i class="far fa-file"></i>
                     </span>
-                    <small>Email</small>
+                    <small>Notice Board</small>
                   </a>
-                  <a href="#!" class="col-4 shortcut-item">
+                  <a href="{% url 'pay' %}" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-info">
                       <i class="ni ni-credit-card"></i>
                     </span>
-                    <small>Payments</small>
+                    <small>Pay Maintenance</small>
                   </a>
-                  <a href="#!" class="col-4 shortcut-item">
+                  <a href="{% url 'view-event' %}" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-green">
-                      <i class="ni ni-books"></i>
+                      <i class="fas fa-tablet-alt"></i>
+                      
                     </span>
-                    <small>Reports</small>
+                    <small>View Event</small>
                   </a>
-                  <a href="#!" class="col-4 shortcut-item">
+                  <a href="{% url 'add_complain' %}" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
-                      <i class="ni ni-pin-3"></i>
+                      <i class="fas fa-book-medical"></i>
+                      
                     </span>
-                    <small>Maps</small>
+                    <small>Add Complain</small>
                   </a>
-                  <a href="#!" class="col-4 shortcut-item">
+                  <a href="{% url 'uview_complains' %}" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
-                      <i class="ni ni-basket"></i>
+                      <i class="fas fa-box"></i>
+                      
                     </span>
-                    <small>Shop</small>
+                    <small>View Complain</small>
                   </a>
                 </div>
               </div>
@@ -371,16 +355,9 @@
                 </a>
                 <a href="{% url 'uchange-password' %}" class="dropdown-item">
                   <i class="ni ni-settings-gear-65"></i>
-                  <span>Chang Password</span>
+                  <span>Change Password</span>
                 </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-calendar-grid-58"></i>
-                  <span>Activity</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-support-16"></i>
-                  <span>Support</span>
-                </a>
+                
                 <div class="dropdown-divider"></div>
                 <a href="{% url 'ulogout' %}" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
